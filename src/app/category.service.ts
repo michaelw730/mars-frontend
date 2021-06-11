@@ -48,7 +48,6 @@ export class CategoryService {
     return this.categories[index];
   }
 
-
   update(id: number, category) {
     var index = null;
     var i =0;
@@ -64,6 +63,16 @@ export class CategoryService {
   }
 
   add(category) {
+    var max_id = null;
+    for (let category of this.categories) {
+      if (max_id == null || max_id < category.id) {
+        max_id = category.id;
+      }
+    }
+
+    max_id = max_id + 1;
+    category.id = max_id;
+
     this.categories.push(category);
   }
 

@@ -41,12 +41,21 @@ export class ItemService {
   }
 
   add(item) {
+    var max_id = null;
+    for (let item of this.items) {
+      if (max_id == null || max_id < item.id) {
+        max_id = item.id;
+      }
+    }
+
+    max_id = max_id + 1;
+    item.id = max_id;
     this.items.push(item);
   }
 
   update(id: number, item) {
     var index = null;
-    var i =0;
+    var i = 0;
     for (let item of this.items) {
       if (id == item.id) {
         index = i;
