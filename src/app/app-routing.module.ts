@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'additem', component: ItemFormComponent },
   { path: 'listcategories', component: CategoryListComponent },
   { path: 'listitems', component: ItemListComponent },
-  { path: 'updatecategory:id', component: CategoryFormComponent },
+  { path: 'updatecategory/:id', component: CategoryFormComponent },
   { path: 'updateitem/:id', component: ItemFormComponent },
   { path: '', pathMatch: 'full', redirectTo: '' }
 ];

@@ -17,7 +17,7 @@
       <li>
         <label for="category_id">Category</label>
         <select name="category_id" id="category_id" formControlName="category_id">
-          <option *ngFor="let category of categories" [value]="category.id">{{ category.id }}</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </select>
       </li>
     </ul>

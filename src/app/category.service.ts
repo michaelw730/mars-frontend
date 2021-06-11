@@ -36,6 +36,33 @@ export class CategoryService {
     return this.categories;
   }
 
+  getCategory(id: number) {
+    var index = null;
+    var i =0;
+    for (let category of this.categories) {
+      if (id == category.id) {
+        index = i;
+      }
+      i++;
+    }
+    return this.categories[index];
+  }
+
+
+  update(id: number, category) {
+    var index = null;
+    var i =0;
+    for (let category of this.categories) {
+      if (id == category.id) {
+        index = i;
+      }
+      i++;
+    }
+    
+    this.categories[index].name = category.name; 
+    this.categories[index].priority = category.priority;
+  }
+
   add(category) {
     this.categories.push(category);
   }
