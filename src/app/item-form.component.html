@@ -1,0 +1,25 @@
+<header>
+    <h2>{{ action }} Item</h2>
+  </header>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+    class="item-form">
+    <ul>
+      <li>
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" formControlName="description">
+      </li>
+      <li>
+        <label for="weight">Weight</label>
+        <input type="text" name="weight" id="weight" formControlName="weight">
+      </li>
+      <li>
+        <label for="category_id">Category</label>
+        <select name="category_id" id="category_id" formControlName="category_id">
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.id }}</option>
+        </select>
+      </li>
+    </ul>
+    <button type="submit">Save</button>
+  </form>

@@ -1,0 +1,11 @@
+.item {
+  border: red 1px solid;
+}
+.edit {
+  background-color: blue;
+  color: white;
+}
+.delete {
+  background-color: red;
+  color: white;
+}

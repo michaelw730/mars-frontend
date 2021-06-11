@@ -1,0 +1,10 @@
+<header>
+
+</header>
+<section class="item-list">
+<mw-item 
+    *ngFor="let item of items"
+    [item]="item"
+    (delete)="onItemDelete($event)">
+</mw-item>
+</section>

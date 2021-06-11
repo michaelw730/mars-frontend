@@ -1,0 +1,11 @@
+<div class = 'item'>
+    <h2>{{ item.description }}</h2>
+    <div>ID: {{ item.id }}</div>
+    <div>Weight: {{ item.weight }}</div>
+    <div>Category: {{ item.category_id }}</div>
+    <div> -- </div>
+    <div>
+    <span class="edit" (click)="onEdit()">Edit</span>
+    <span class="delete" (click)="onDelete()">Delete</span>
+    </div>
+</div>

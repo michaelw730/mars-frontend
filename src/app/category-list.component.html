@@ -1,0 +1,12 @@
+<header>
+
+</header>
+<section>
+<div class="category-list">
+<mw-category
+    *ngFor="let category of categories"
+    [category]="category"
+    (delete)="onCategoryDelete($event)">
+</mw-category>
+</div>
+</section>
