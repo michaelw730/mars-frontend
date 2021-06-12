@@ -9,10 +9,16 @@ import { CategoryService } from './category.service';
 export class CategoryListComponent {
   categories;
 
-  constructor(private categoryService:CategoryService) {}
+  constructor(private categoryService:CategoryService) {
+  }
 
   ngOnInit() {
-    this.categories = this.categoryService.get();
+    this.categoryService.get().subscribe((data) => {
+      this.categories = data;
+      console.log(data);
+    });
+    //this.categories = this.categoryService.get();
+    //console.log(this.categories)
   }
 
   onCategoryDelete(category) { 

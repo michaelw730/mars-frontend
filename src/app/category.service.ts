@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
+  baseUrl = 'http://localhost:8080';
+  data;
+
+  constructor(private http: HttpClient) { }
+
     categories = [
         {
             id: 1,
@@ -33,19 +42,11 @@ export class CategoryService {
     ];
 
   get() {
-    return this.categories;
+    return this.http.get(`${this.baseUrl}/categories`);
   }
 
   getCategory(id: number) {
-    var index = null;
-    var i =0;
-    for (let category of this.categories) {
-      if (id == category.id) {
-        index = i;
-      }
-      i++;
-    }
-    return this.categories[index];
+    return this.http.get(`${this.baseUrl}/categories/${id}`);
   }
 
   update(id: number, category) {
@@ -82,4 +83,15 @@ export class CategoryService {
       this.categories.splice(index, 1);
     }
   }
+}
+
+
+interface CategoriesResponse {
+  categories: ICategory[];
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
+  priority: number;
 }
