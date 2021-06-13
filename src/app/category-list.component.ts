@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { CategoryService } from './category.service';
 import { Router } from '@angular/router';
 
@@ -19,6 +19,15 @@ export class CategoryListComponent {
       this.categories = data;
       console.log(data);
     });
+  }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    if (changes['categories']) {
+      await this.categoryService.get().subscribe((data) => {
+        this.categories = data;
+        console.log(data);
+      });
+    }
   }
 
   onCategoryDelete(category) { 
