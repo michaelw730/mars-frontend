@@ -1,0 +1,25 @@
+<header>
+
+</header>
+<section>
+<div class="stats">
+
+<table>
+<tr>
+    <th>Category Name</th>
+    <th>Sum Weight</th>
+    <th>Priority</th>
+</tr>
+
+    <tr *ngFor="let x of statistics"
+    >
+     <td>{{ x.category_name }}</td>
+     <td>{{ x.sum_weight }}</td>
+     <td>{{ x.priority }}</td>
+ </tr>
+
+
+</table>
+
+</div>
+</section>

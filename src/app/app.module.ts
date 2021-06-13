@@ -12,6 +12,8 @@ import { CategoryListComponent } from './category-list.component';
 import { ItemListComponent } from './item-list.component';
 import { CategoryComponent } from './category.component';
 import { ItemComponent } from './item.component';
+import { StatsComponent } from './stats.component';
+import { DatabaseComponent } from './database.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ItemComponent } from './item.component';
     CategoryListComponent,
     ItemListComponent,
     CategoryComponent,
-    ItemComponent
+    ItemComponent,
+    StatsComponent,
+    DatabaseComponent
   ],
   imports: [
     BrowserModule,
