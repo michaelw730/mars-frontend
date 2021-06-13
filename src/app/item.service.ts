@@ -22,12 +22,12 @@ export class ItemService {
     return this.http.get(`${this.baseUrl}/items/${id}`).toPromise();  
   }
 
-  update(id: number, category) {
-    this.http.put(`${this.baseUrl}/items/${id}`, category).subscribe(); 
+  update(id: number, item) {
+    this.http.put(`${this.baseUrl}/items/${id}`, item).subscribe(); 
   }
 
-  add(category) {
-    this.http.post(`${this.baseUrl}/items`, category).subscribe(); 
+  add(item) {
+    this.http.post(`${this.baseUrl}/items`, item).subscribe(); 
   }
 
   delete(id) {

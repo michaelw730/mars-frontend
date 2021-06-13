@@ -59,6 +59,7 @@ export class ItemFormComponent implements OnInit {
       this.weight = this.item.weight;
       this.category_id = this.item.category_id;
       this.setUpForm();
+      console.log(data);
     });    
   }
 
