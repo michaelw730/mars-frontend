@@ -2,10 +2,10 @@
 <div class="category">
     <h2>{{ category.name }}</h2>
     <div>ID: {{ category.id }}</div>
-    <div>priority: {{ category.priority }}</div>
+    <div>Priority: {{ category.priority }}</div>
     <div> -- </div>
     <div>
-    <span class="edit" (click)="onEdit()">Edit</span>
-    <span class="delete" (click)="onDelete()">Delete</span>
+    <span class="edit" (click)="onEdit()" class="btn btn-primary">Edit</span>
+    <span class="delete" (click)="onDelete()" class="btn btn-danger">Delete</span>
     </div>
 </div>

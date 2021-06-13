@@ -1,10 +1,11 @@
 <header>
-    <h2>{{ action }} Category</h2>
+    <h1>{{ action }} Category</h1>
   </header>
+  <div class="category-form">
   <form
     [formGroup]="form"
     (ngSubmit)="onSubmit(form.value)"
-    class="category-form">
+    >
     <ul>
       <li>
         <label for="name">Name</label>
@@ -21,5 +22,6 @@
         </select>
       </li>
     </ul>
-    <button type="submit">Save</button>
+    <button type="submit" class="btn btn-success">Save</button>
   </form>
+</div>
