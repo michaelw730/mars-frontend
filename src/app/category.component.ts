@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { ICategory } from './category.service';
 
 @Component({
   selector: 'mw-category',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
-  @Input() category;
+  @Input() category: ICategory;
   @Output() delete = new EventEmitter();
 
   constructor(

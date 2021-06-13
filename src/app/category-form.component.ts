@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { CategoryService } from './category.service';
-
-import { map, delay } from "rxjs/operators";
+import { Router, ActivatedRoute } from '@angular/router';
+import { CategoryService, ICategory } from './category.service';
 
 @Component({
   selector: 'mw-category-form',
@@ -13,12 +10,12 @@ import { map, delay } from "rxjs/operators";
 })
 export class CategoryFormComponent implements OnInit {
   form: FormGroup;
-  categories;
-  id;
+  categories: ICategory[];
+  id: number;
   action = "Add";
-  category;
-  name = "";
-  priority = "";
+  category: any;
+  name: string;
+  priority: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,7 +55,7 @@ export class CategoryFormComponent implements OnInit {
     });    
   }
 
-  onSubmit(category) {
+  onSubmit(category: ICategory) {
     console.log (category);
     if (this.action == "Add") {
       this.categoryService.add(category);

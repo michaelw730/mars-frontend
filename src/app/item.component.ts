@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { IItem } from './item.service';
 
 @Component({
   selector: 'mw-item',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent {
-  @Input() item;
+  @Input() item: IItem;
   @Output() delete = new EventEmitter();
 
   constructor(

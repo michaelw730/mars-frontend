@@ -1,5 +1,5 @@
-import { Component, SimpleChanges } from '@angular/core';
-import { CategoryService } from './category.service';
+import { Component/*, SimpleChanges*/ } from '@angular/core';
+import { CategoryService, ICategory } from './category.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent {
-  categories;
+  categories: any;
 
   constructor(private categoryService:CategoryService,
     private router: Router) {
   }
 
-  async ngOnInit() {
-    await this.categoryService.get().subscribe((data) => {
+  /*async */ngOnInit() {
+    /*await */this.categoryService.get().subscribe((data) => {
       this.categories = data;
       console.log(data);
     });
@@ -30,7 +30,7 @@ export class CategoryListComponent {
     }
   }
 */
-  onCategoryDelete(category) { 
+  onCategoryDelete(category: ICategory) { 
     this.categoryService.delete(category.id);
     this.router.navigate(["listcategories"]);
     location.reload();

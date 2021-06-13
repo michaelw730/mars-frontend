@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
-import { map, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
   baseUrl = 'http://localhost:8080';
-  data;
+  data: ICategory;
 
   constructor(private http: HttpClient) { }
 
@@ -22,15 +18,15 @@ export class CategoryService {
     return this.http.get(`${this.baseUrl}/categories/${id}`).toPromise();  
   }
 
-  update(id: number, category) {
+  update(id: number, category: ICategory) {
     this.http.put(`${this.baseUrl}/categories/${id}`, category).subscribe(); 
   }
 
-  add(category) {
+  add(category: ICategory) {
     this.http.post(`${this.baseUrl}/categories`, category).subscribe(); 
   }
 
-  delete(id) {
+  delete(id: number) {
     this.http.delete(`${this.baseUrl}/categories/${id}`).subscribe(); 
   }
 }

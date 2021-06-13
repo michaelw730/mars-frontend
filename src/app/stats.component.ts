@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { StatsService } from './stats.service';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./stats.component.css']
 })
 export class StatsComponent {
-  statistics;
+  statistics: any;
 
   constructor(private statsService:StatsService,
     private router: Router) {

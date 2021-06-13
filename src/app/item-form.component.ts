@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { ItemService } from './item.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ItemService, IItem } from './item.service';
 import { CategoryService } from './category.service';
 
 @Component({
@@ -12,13 +11,13 @@ import { CategoryService } from './category.service';
 })
 export class ItemFormComponent implements OnInit {
   form: FormGroup;
-  categories;
-  id;
+  categories: any;
+  id: number;
   action = "Add";
-  item;
-  description = "";
-  weight = "";
-  category_id = "";
+  item: any;
+  description: string = "";
+  weight: number;
+  category_id: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,7 +34,6 @@ export class ItemFormComponent implements OnInit {
       this.action = "Update";
       this.fetchItem();
     } 
-    
     this.setUpForm();
   }
 
@@ -70,7 +68,7 @@ export class ItemFormComponent implements OnInit {
     });    
   }
 
-  onSubmit(item) {
+  onSubmit(item: IItem) {
     console.log (item);
     if (this.action == "Add") {
       this.itemService.add(item);

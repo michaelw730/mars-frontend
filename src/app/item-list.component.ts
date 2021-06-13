@@ -1,5 +1,5 @@
-import { Component, SimpleChanges } from '@angular/core';
-import { ItemService } from './item.service';
+import { Component/*, SimpleChanges*/ } from '@angular/core';
+import { ItemService, IItem } from './item.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,19 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent {
-  items;
+  items: any;
 
   constructor(private itemService: ItemService,
     private router: Router
     ) {}
 
-    async ngOnInit() {
-      await this.itemService.get().subscribe((data) => {
+    /*async */ngOnInit() {
+      /*await*/ this.itemService.get().subscribe((data) => {
         this.items = data;
         console.log(data);
       });
     }
-  
+  /*
     async ngOnChanges(changes: SimpleChanges) {
       if (changes['items']) {
         await this.itemService.get().subscribe((data) => {
@@ -29,8 +29,8 @@ export class ItemListComponent {
         });
       }
     }
-  
-    onItemDelete(items) { 
+  */
+    onItemDelete(items: IItem) { 
       this.itemService.delete(items.id);
       this.router.navigate(["listitems"]);
       location.reload();

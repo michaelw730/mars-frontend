@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { map, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
   baseUrl = 'http://localhost:8080';
-  data;
-
   constructor(private http: HttpClient) { }
 
   get() {
@@ -22,20 +17,20 @@ export class ItemService {
     return this.http.get(`${this.baseUrl}/items/${id}`).toPromise();  
   }
 
-  update(id: number, item) {
+  update(id: number, item: IItem) {
     this.http.put(`${this.baseUrl}/items/${id}`, item).subscribe(); 
   }
 
-  add(item) {
+  add(item: IItem) {
     this.http.post(`${this.baseUrl}/items`, item).subscribe(); 
   }
 
-  delete(id) {
+  delete(id: number) {
     this.http.delete(`${this.baseUrl}/items/${id}`).subscribe(); 
   }
 }
 
-interface IItem {
+export interface IItem {
   id: number;
   description: string;
   weight: number;
