@@ -20,7 +20,7 @@ export class CategoryListComponent {
       console.log(data);
     });
   }
-
+/*
   async ngOnChanges(changes: SimpleChanges) {
     if (changes['categories']) {
       await this.categoryService.get().subscribe((data) => {
@@ -29,7 +29,7 @@ export class CategoryListComponent {
       });
     }
   }
-
+*/
   onCategoryDelete(category) { 
     this.categoryService.delete(category.id);
     this.router.navigate(["listcategories"]);

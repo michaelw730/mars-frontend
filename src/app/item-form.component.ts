@@ -34,9 +34,9 @@ export class ItemFormComponent implements OnInit {
       this.id = this.route.snapshot.params.id;
       this.action = "Update";
       this.fetchItem();
-    } else {
-      this.setUpForm();
-    }
+    } 
+    
+    this.setUpForm();
   }
 
   setUpForm() {
