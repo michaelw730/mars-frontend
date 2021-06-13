@@ -33,15 +33,14 @@ export class ItemFormComponent implements OnInit {
       //TODO: error checking
       this.id = this.route.snapshot.params.id;
       this.action = "Update";
-
-      this.item = this.itemService.getItem(this.id);
-      this.description = this.item.description;
-      this.weight = this.item.weight;
-      this.category_id = this.item.category_id;
+      this.fetchItem();
+    } else {
+      this.setUpForm();
     }
+  }
 
-    this.categories = this.categoryService.get();
-
+  setUpForm() {
+    this.fetchCategories();
     this.form = this.formBuilder.group({
       description: this.formBuilder.control(this.description, Validators.compose([
         Validators.required,
@@ -50,8 +49,24 @@ export class ItemFormComponent implements OnInit {
       weight: this.formBuilder.control(this.weight),
       category_id: this.formBuilder.control([this.category_id])
     });
+  }
 
+  async fetchItem() {
+    await this.itemService.getItem(this.id)
+     .then((data) => {
+      this.item = data;
+      this.description = this.item.description;
+      this.weight = this.item.weight;
+      this.category_id = this.item.category_id;
+      this.setUpForm();
+    });    
+  }
 
+  fetchCategories() {
+    this.categoryService.get()
+     .subscribe((data) => {
+      this.categories = data;
+    });    
   }
 
   onSubmit(item) {

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { ItemService } from './item.service';
-//import { CategoryService } from './category.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mw-item-list',
@@ -9,18 +9,30 @@ import { ItemService } from './item.service';
 })
 export class ItemListComponent {
   items;
-  categories;
 
   constructor(private itemService: ItemService,
-    //private categoryService: CategoryService
+    private router: Router
     ) {}
 
-  ngOnInit() {
-    this.items = this.itemService.get();
-    //this.categories = this.categoryService.get();
-  }
-
-  onItemDelete(item) { 
-    this.itemService.delete(item);
-  }
+    async ngOnInit() {
+      await this.itemService.get().subscribe((data) => {
+        this.items = data;
+        console.log(data);
+      });
+    }
+  
+    async ngOnChanges(changes: SimpleChanges) {
+      if (changes['items']) {
+        await this.itemService.get().subscribe((data) => {
+          this.items = data;
+          console.log(data);
+        });
+      }
+    }
+  
+    onItemDelete(items) { 
+      this.itemService.delete(items.id);
+      this.router.navigate(["listitems"]);
+      location.reload();
+    }
 }

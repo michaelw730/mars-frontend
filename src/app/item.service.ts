@@ -1,82 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+import { map, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemService {
-    items: IItem[] = [
-        {
-            id: 1,
-            description: 'Item1',
-            weight: 100,
-            category_id: 1
-        },
-        {
-            id: 2,
-            description: 'Item2',
-            weight: 100,
-            category_id: 2
-        }, {
-            id: 3,
-            description: 'Item3',
-            weight: 100,
-            category_id: 3
-        }
-        ];
+  baseUrl = 'http://localhost:8080';
+  data;
+
+  constructor(private http: HttpClient) { }
 
   get() {
-    return this.items;
+    return this.http.get(`${this.baseUrl}/items`);
   }
 
   getItem(id: number) {
-    var index = null;
-    var i =0;
-    for (let item of this.items) {
-      if (id == item.id) {
-        index = i;
-      }
-      i++;
-    }
-    return this.items[index];
+    return this.http.get(`${this.baseUrl}/items/${id}`).toPromise();  
   }
 
-  add(item) {
-    var max_id = null;
-    for (let item of this.items) {
-      if (max_id == null || max_id < item.id) {
-        max_id = item.id;
-      }
-    }
-
-    max_id = max_id + 1;
-    item.id = max_id;
-    this.items.push(item);
+  update(id: number, category) {
+    this.http.put(`${this.baseUrl}/items/${id}`, category).subscribe(); 
   }
 
-  update(id: number, item) {
-    var index = null;
-    var i = 0;
-    for (let item of this.items) {
-      if (id == item.id) {
-        index = i;
-      }
-      i++;
-    }
-    
-    this.items[index].description = item.description; 
-    this.items[index].weight = item.weight;
-    this.items[index].category_id = item.category_id;
-
+  add(category) {
+    this.http.post(`${this.baseUrl}/items`, category).subscribe(); 
   }
 
-  delete(item) {
-    const index = this.items.indexOf(item);
-    if (index >= 0) {
-      this.items.splice(index, 1);
-    }
+  delete(id) {
+    this.http.delete(`${this.baseUrl}/items/${id}`).subscribe(); 
   }
 }
-
 
 interface IItem {
   id: number;
