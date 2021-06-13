@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './category.service';
 
+import { map, delay } from "rxjs/operators";
+
 @Component({
   selector: 'mw-category-form',
   templateUrl: './category-form.component.html',
@@ -22,32 +24,21 @@ export class CategoryFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
     private router: Router,
-    private route: ActivatedRoute) {
-
-      
-    }
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
     //check route if add or update
     if (this.router.url.includes("updatecategory") === true) {
       //TODO: error checking
       this.id = this.route.snapshot.params.id;
-      this.action = "Update";
-
+      this.action = "Update"; 
       this.fetchCategory();
-      setTimeout(() => {  console.log("World!"); }, 20000);
-      /*
-      console.log("asda3");
-      console.log(this.category);
-      console.log("asda4");
-      */
-      this.name = this.category.name;
-      this.priority = this.category.priority;
-      console.log(this.category);
-      
+    } else {
+      this.setUpForm();
     }
-    
+  }
 
+  setUpForm() {
     this.form = this.formBuilder.group({
       name: this.formBuilder.control(this.name, Validators.compose([
         Validators.required,
@@ -57,16 +48,14 @@ export class CategoryFormComponent implements OnInit {
     });
   }
 
-  fetchCategory() {
-    this.categoryService.getCategory(this.id).subscribe((data) => {
+  async fetchCategory() {
+    await this.categoryService.getCategory(this.id)
+     .then((data) => {
       this.category = data;
-      console.log("asda1");
-      console.log(this.category)
-      console.log("asda2");
-      return data;
-    });
-
-    
+      this.name = this.category.name;
+      this.priority = this.category.priority;
+      this.setUpForm();
+    });    
   }
 
   onSubmit(category) {

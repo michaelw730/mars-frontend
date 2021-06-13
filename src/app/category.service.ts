@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+
+import { map, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
@@ -46,42 +47,19 @@ export class CategoryService {
   }
 
   getCategory(id: number) {
-    return this.http.get(`${this.baseUrl}/categories/${id}`);
+    return this.http.get(`${this.baseUrl}/categories/${id}`).toPromise();  
   }
 
   update(id: number, category) {
-    var index = null;
-    var i =0;
-    for (let category of this.categories) {
-      if (id == category.id) {
-        index = i;
-      }
-      i++;
-    }
-    
-    this.categories[index].name = category.name; 
-    this.categories[index].priority = category.priority;
+    this.http.put(`${this.baseUrl}/categories/${id}`, category).subscribe(); 
   }
 
   add(category) {
-    var max_id = null;
-    for (let category of this.categories) {
-      if (max_id == null || max_id < category.id) {
-        max_id = category.id;
-      }
-    }
-
-    max_id = max_id + 1;
-    category.id = max_id;
-
-    this.categories.push(category);
+    this.http.post(`${this.baseUrl}/categories`, category).subscribe(); 
   }
 
-  delete(category) {
-    const index = this.categories.indexOf(category);
-    if (index >= 0) {
-      this.categories.splice(index, 1);
-    }
+  delete(id) {
+    this.http.delete(`${this.baseUrl}/categories/${id}`).subscribe(); 
   }
 }
 

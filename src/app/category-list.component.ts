@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoryService } from './category.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mw-category-list',
@@ -9,19 +10,20 @@ import { CategoryService } from './category.service';
 export class CategoryListComponent {
   categories;
 
-  constructor(private categoryService:CategoryService) {
+  constructor(private categoryService:CategoryService,
+    private router: Router) {
   }
 
-  ngOnInit() {
-    this.categoryService.get().subscribe((data) => {
+  async ngOnInit() {
+    await this.categoryService.get().subscribe((data) => {
       this.categories = data;
       console.log(data);
     });
-    //this.categories = this.categoryService.get();
-    //console.log(this.categories)
   }
 
   onCategoryDelete(category) { 
-    this.categoryService.delete(category);
+    this.categoryService.delete(category.id);
+    this.router.navigate(["listcategories"]);
+    location.reload();
   }
 }
