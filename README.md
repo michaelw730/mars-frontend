@@ -1,6 +1,6 @@
 # mars-frontend
 
-Angular backend for Mars Assignment
+Angular frontend for Mars Assignment
 
 Available as docker image:
 docker pull ghcr.io/michaelw730/mars-frontend:latest
